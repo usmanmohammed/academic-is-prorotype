@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="SchoolManagement.Desktop.Views.Settings.Account.Permissions"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SchoolManagement.Desktop.Views.Settings.Account"
+             xmlns:c="clr-namespace:SchoolManagement.Desktop.Converters"
+             mc:Ignorable="d"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Medium"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto"
+             Background="{DynamicResource MaterialDesignPaper}"
+             Foreground="{DynamicResource GreyFontForeground}"
+             FontFamily="Roboto"
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <c:UserAccountToUserAccountTitleConverter x:Key="UserAccountToUserAccountTitleConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="15"/>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="15"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="15"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="1" Margin="0,0,5,0" Grid.Row="1" Foreground="{StaticResource AppBrush}" TextWrapping="Wrap" Text="User Account" VerticalAlignment="Bottom"/>
+        <TextBlock Grid.Column="1" Margin="0" Grid.Row="3" Foreground="{StaticResource AppBrush}" TextWrapping="Wrap" Text="Permissions" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="userTextBox" Grid.Column="1" Margin="0,5,5,5" Grid.Row="2" IsReadOnly="True" GotFocus="btnSearchUser_Click" TextWrapping="Wrap" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Select..." Text="{Binding UserAccount, Converter={StaticResource UserAccountToUserAccountTitleConverter}}" Grid.ColumnSpan="1"/>
+        <Button x:Name="btnSearchUser" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,2,0" Padding="0" Grid.Row="2" Height="Auto" Width="auto" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnSearchUser_Click">
+            <materialDesign:PackIcon Kind="ArrowDownBold" Height="22" Width="22" Foreground="{DynamicResource AppBrush}" Margin="0,-5,0,0" HorizontalAlignment="Right" />
+        </Button>
+        <TreeView x:Name="treeView" Grid.Column="1" Grid.Row="4" ItemsSource="{Binding UserPermissions}" Margin="0,5,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                    <CheckBox IsChecked="{Binding IsChecked}" Checked="CheckBox_Changed" Unchecked="CheckBox_Changed" Content="{Binding Title}"/>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+        <StackPanel Grid.Column="1" Margin="0" Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Right" Grid.ColumnSpan="2">
+            <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Right" Grid.Row="2" Width="100" Height="Auto" Click="btnSave_Click"/>
+            <Button x:Name="btnCancel" Content="Cancel" Height="Auto" Width="100" Margin="10,0,0,0" Click="btnCancel_Click"/>
+        </StackPanel>
+        <Border BorderBrush="{DynamicResource AppBrush}" BorderThickness="2" Grid.Column="1" Margin="0,5,0,0" Grid.Row="4" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+    </Grid>
+</UserControl>

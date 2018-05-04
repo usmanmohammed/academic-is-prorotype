@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="SchoolManagement.Desktop.Views.StudentManagement.AcademicManagement.Modules._Module"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SchoolManagement.Desktop.Views.StudentManagement.AcademicManagement.Modules"
+             mc:Ignorable="d"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Medium"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto"
+             Foreground="{DynamicResource GreyFontForeground}"
+             FontFamily="Roboto"
+             Height="250" Width="350">
+    <Grid Background="{DynamicResource MaterialDesignPaper}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="15"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="15"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="15"/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="moduleCodeTextBox" Grid.Column="1" Margin="0,6" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding Module.ModuleCode, UpdateSourceTrigger=Explicit}"/>
+        <TextBox x:Name="moduleDescriptionTextBox" Grid.Column="1" Margin="0,7" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding Module.ModuleDescription, UpdateSourceTrigger=Explicit}"/>
+        <TextBox x:Name="courseTextBox" Grid.Column="1" Margin="0,7" Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding Module.Course.CourseDescription, UpdateSourceTrigger=Explicit}"/>
+        <StackPanel Grid.Column="1" Margin="0" Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="btnAdd" Content="Save"  Height="Auto" Width="100" Click="btnSave_Click"/>
+            <Button x:Name="btnCancel" Content="Cancel" Height="Auto" Width="100" Margin="10,0,0,0" Click="btnCancel_Click"/>
+        </StackPanel>
+        <TextBlock Grid.Column="1" Foreground="{StaticResource AppBrush}" Margin="0" Grid.Row="1" TextWrapping="Wrap" Text="Module Code" VerticalAlignment="Bottom"/>
+        <TextBlock Grid.Column="1" Foreground="{StaticResource AppBrush}" Margin="0" Grid.Row="3" TextWrapping="Wrap" Text="Module Description" VerticalAlignment="Bottom"/>
+        <TextBlock Grid.Column="1" Foreground="{StaticResource AppBrush}" Margin="0" Grid.Row="5" TextWrapping="Wrap" Text="Course" VerticalAlignment="Bottom"/>
+
+        <Button x:Name="btnSearchCourse" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,-3,0" Padding="0" Grid.Row="6" Height="Auto" Width="auto" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnSearchCourse_Click">
+            <materialDesign:PackIcon Kind="ArrowDownBold" Height="22" Width="22" Foreground="{DynamicResource AppBrush}" Margin="0,-5,0,0" HorizontalAlignment="Right" />
+        </Button>
+        <Border x:Name="loadingBar" Visibility="Collapsed" Grid.RowSpan="10" Grid.ColumnSpan="3" Panel.ZIndex="1000" Background="{StaticResource AppBrush}">
+            <Grid Width="150" Height="60" VerticalAlignment="Center" Background="{DynamicResource MaterialDesignPaper}">
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}" Value="0"
+                     IsIndeterminate="True" Width="25" Height="25" Margin="5,0,0,0" VerticalAlignment="Center" />
+                    <TextBlock x:Name="btnCancelOperation" Text="Loading..." FontSize="16" Margin="12,0,0,0" Height="Auto" Foreground="{DynamicResource AppBrush}" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
